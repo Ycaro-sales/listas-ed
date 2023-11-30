@@ -59,15 +59,15 @@ Node *search(Node *first, int item) {
 
         return searchedNode;
 };
+
 Node *removeNode(Node *first, int item) {
         Node *curr = first;
         Node *removedNode = NULL;
 
-        while (curr != NULL) {
+        while (curr->next != NULL) {
                 if (curr->next->item == item) {
                         Node *removedNode = curr->next;
                         curr->next = curr->next->next;
-                        return removedNode;
                 }
 
                 curr = curr->next;
