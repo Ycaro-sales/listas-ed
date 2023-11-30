@@ -5,7 +5,7 @@
 typedef struct node Node;
 
 Node *createLinkedList();
-Node *insertNode(Node *node, int item);
+Node *insertNode(Node *node, int item, char character);
 
 void printLinkedList(Node *first);
 int isEmpty(Node *first);

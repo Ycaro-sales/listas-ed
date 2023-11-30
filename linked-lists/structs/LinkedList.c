@@ -1,9 +1,11 @@
 #include "LinkedList.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 struct node {
         int item;
+        char character;
         Node *next;
 };
 
@@ -13,9 +15,10 @@ Node *createLinkedList() {
         return tmp;
 };
 
-Node *insertNode(Node *node, int item) {
+Node *insertNode(Node *node, int item, char character) {
         Node *tmp = malloc(sizeof *tmp);
         tmp->item = item;
+        tmp->character = character;
 
         if (node == NULL) {
                 tmp->next = NULL;
@@ -36,8 +39,12 @@ void printLinkedList(Node *first) {
         int count = 1;
 
         while (curr != NULL) {
-                printf("item %d:\t%d\n", count, curr->item);
+                printf("Node %d:\n", count);
+                // printf("\tcharacter:\t%d\n\n", curr->character);
+                printf("\titem: %d\n", curr->item);
+
                 count++;
+
                 curr = curr->next;
         }
 }
