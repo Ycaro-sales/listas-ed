@@ -92,11 +92,18 @@ void inverter(LISTA *l) {
     NO *curr = l->cabeca;
     NO *prox = l->cabeca->prox;
 
-    while (prox != l->cabeca) {
+    while (curr->prox != l->cabeca) {
+        printf("%d\n", curr->item.chave);
         curr->prox = prev;
+        prev = curr;
         curr = prox;
         prox = curr->prox;
     }
+
+    curr->prox = prev;
+
+    while (curr->prox != NULL)
+        curr = curr->prox;
 
     curr->prox = l->cabeca;
 }
@@ -125,8 +132,8 @@ int main() {
     lerItens(&l);
     imprimirLista(&l);
 
-    inverter(&l);
-    imprimirLista(&l);
+    // inverter(&l);
+    // imprimirLista(&l);
 
     destruir(&l);
     return 0;

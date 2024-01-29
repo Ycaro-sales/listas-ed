@@ -19,7 +19,8 @@ OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SRC_FILES))
 EXEC_FILES = $(patsubst $(SRC_DIR)/%.c, $(EXEC_DIR)/%, $(SRC_FILES))
 
 # Compiler flags
-CFLAGS = -Wall -g
+CFLAGS = 
+# -Wall -g
 
 # Default target
 all: $(EXEC_FILES)
