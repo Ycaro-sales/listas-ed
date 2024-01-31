@@ -88,24 +88,37 @@ void destruir(LISTA *l) {
            ou seja, evitando copiar os dados para uma nova lista.
 */
 void inverter(LISTA *l) {
-    NO *prev = NULL;
-    NO *curr = l->cabeca;
-    NO *prox = l->cabeca->prox;
+    NO *prev = l->cabeca;
+    NO *curr = l->cabeca->prox;
+    NO *prox = l->cabeca->prox->prox;
 
-    while (curr->prox != l->cabeca) {
-        printf("%d\n", curr->item.chave);
+    while (prox != l->cabeca) {
         curr->prox = prev;
         prev = curr;
         curr = prox;
-        prox = curr->prox;
+        prox = prox->prox;
     }
 
     curr->prox = prev;
-
-    while (curr->prox != NULL)
-        curr = curr->prox;
-
-    curr->prox = l->cabeca;
+    l->cabeca->prox = curr;
+    // NO *prev = NULL;
+    // NO *curr = l->cabeca;
+    // NO *prox = l->cabeca->prox;
+    //
+    // while (curr->prox != l->cabeca) {
+    //     printf("%d\n", curr->item.chave);
+    //     curr->prox = prev;
+    //     prev = curr;
+    //     curr = prox;
+    //     prox = curr->prox;
+    // }
+    //
+    // curr->prox = prev;
+    //
+    // while (curr->prox != NULL)
+    //     curr = curr->prox;
+    //
+    // curr->prox = l->cabeca;
 }
 
 /////////////////////////////////////////////////////

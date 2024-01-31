@@ -1,81 +1,76 @@
-#include <math.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 typedef struct no {
     int item;
-    struct no *prox;
+    struct no *next;
 } NO;
 
-typedef struct {
+typedef struct lista {
     NO *cabeca;
     int tamanho;
 } LISTA;
 
 LISTA *inicializar() {
-    LISTA *l = (LISTA *)malloc(sizeof(LISTA));
-
+    LISTA *l = malloc(sizeof(LISTA));
     l->cabeca = NULL;
     l->tamanho = 0;
-
     return l;
 }
 
-void imprimir(LISTA *l) {
-    NO *curr = l->cabeca;
-    while (curr->prox != NULL) {
-        printf("%d ", curr->item);
-        curr = curr->prox;
-    }
+NO *criarNo(int item) {
+    NO *no = malloc(sizeof(NO));
+
+    no->item = item;
+    no->next = NULL;
+
+    return no;
 }
 
 void append(LISTA *l, int item) {
-    NO *tmp = (NO *)malloc(sizeof(NO));
+    l->tamanho++;
 
-    tmp->item = item;
-    tmp->prox = NULL;
+    if (l->cabeca == NULL) {
+        l->cabeca = criarNo(item);
+        return;
+    }
 
+    NO *no = criarNo(item);
     NO *curr = l->cabeca;
 
-    while (curr->prox != NULL)
-        curr = curr->prox;
+    while (curr->next != NULL) {
+        curr = curr->next;
+    }
 
-    curr->prox = tmp;
+    curr->next = no;
 }
-void preencherLista(LISTA *l) {
+
+void exibirLista(LISTA *l) {
+    NO *curr = l->cabeca;
+
+    while (curr != NULL) {
+        printf("%d ", curr->item);
+        curr = curr->next;
+    }
+    printf("\n");
+}
+
+void inverterLista(LISTA *l) {
+}
+
+int main(int argc, char *argv[]) {
     int input;
-
-    while (1) {
-        scanf("%d ", &input);
-        append(l, input);
-
-        if (input == EOF) {
-            break;
-        }
-    }
-}
-
-void inverter(LISTA *l) {
-    NO *prev = NULL;
-    NO *curr = l->cabeca;
-    NO *prox = l->cabeca->prox;
-
-    while (curr->prox != NULL) {
-        curr->prox = prev;
-        prev = curr;
-        curr = prox;
-        prox = curr->prox;
-    }
-    curr->prox = prev;
-}
-
-int main() {
+    
     LISTA *l = inicializar();
 
-    preencherLista(l);
-    inverter(l);
-    imprimir(l);
+    while (scanf("%d", &input) != EOF) {
+        append(l, input);
+    }
+    
 
-    return 0;
+    inverterLista(l);
+    exibirLista(l);
+
+    return EXIT_SUCCESS;
 }
